@@ -8,13 +8,13 @@ isodir/boot/grub:
 	mkdir -p isodir/boot/grub
 
 boot.o: boot.s
-	nix-shell --run '$AS boot.s -o boot.o' shell.nix
+	nix-shell --run '$$AS boot.s -o boot.o' shell.nix
 
 kernel.o: kernel.c
-	nix-shell --run '$CC -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra' shell.nix
+	nix-shell --run '$$CC -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra' shell.nix
 
 myos.bin: kernel.o boot.o
-	nix-shell --run '$CC -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc' shell.nix
+	nix-shell --run '$$CC -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc' shell.nix
 
 
 clean:
