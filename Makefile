@@ -16,9 +16,6 @@ kernel.o: kernel.c
 myos.bin: kernel.o boot.o
 	nix-shell --run '$$CC -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc' shell.nix
 
-
 clean:
-	rm myos.bin
 	rm myos.iso
-	rm boot.o
-	rm kernel.o
+
